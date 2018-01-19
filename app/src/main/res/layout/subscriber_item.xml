@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+                name="subscriber"
+                type="com.blackbelt.githubcodechallenge.view.details.viewmodel.OwnerViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:gravity="center"
+
+            android:layout_width="match_parent"
+            android:background="@drawable/subscriber_background"
+            android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/user_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:layout_margin="@dimen/margin_4"
+                rounded="@{true}"
+                loadImage="@{subscriber.avatarUrl}" />
+
+
+        <TextView
+                android:text="@{subscriber.name}"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_16"
+                android:textColor="#80000000"
+                android:ellipsize="end"
+                android:lines="2"
+                android:gravity="center_horizontal" />
+
+    </LinearLayout>
+</layout>

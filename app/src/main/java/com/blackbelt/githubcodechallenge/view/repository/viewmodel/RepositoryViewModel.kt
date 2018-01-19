@@ -17,6 +17,7 @@ import com.blackbelt.bindings.viewmodel.BaseViewModel
 import com.blackbelt.githubcodechallenge.BR
 import com.blackbelt.githubcodechallenge.R
 import com.blackbelt.githubcodechallenge.repository.IRepositoryManager
+import com.blackbelt.githubcodechallenge.view.misc.viewmodel.LoadingIndicatorViewModel
 import com.blackbelt.githubcodechallenge.view.misc.viewmodel.ProgressLoader
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-open class RepositoryViewModel constructor(repositoryManager: IRepositoryManager, resources: Resources) : BaseViewModel() {
+open class RepositoryViewModel constructor(repositoryManager: IRepositoryManager, resources: Resources) : LoadingIndicatorViewModel() {
 
     private val mResources = resources
 
@@ -34,14 +35,6 @@ open class RepositoryViewModel constructor(repositoryManager: IRepositoryManager
                     RepositoryItemViewModel::class.java to AndroidItemBinder(R.layout.repository_item, BR.repositoryItemViewModel))
 
     private var mFirstLoading: Boolean = false
-
-    protected var mPageDescriptor = PageDescriptor.PageDescriptorBuilder
-            .setPageSize(24)
-            .setStartPage(1)
-            .setThreshold(5)
-            .build()
-
-    protected val mProgressLoader: ProgressLoader = ProgressLoader()
 
     private val mRepositoryManager = repositoryManager
 
@@ -154,16 +147,6 @@ open class RepositoryViewModel constructor(repositoryManager: IRepositoryManager
         mSearchNotifierDisposable.dispose()
     }
 
-    private val mItems: MutableList<Any> = mutableListOf()
-
-    private fun handleLoading(loading: Boolean) {
-        if (mPageDescriptor.getCurrentPage() == 1) {
-            setFistLoading(loading)
-        } else {
-            setLoading(loading)
-        }
-    }
-
     private fun setFistLoading(loading: Boolean) {
         mFirstLoading = loading
         notifyPropertyChanged(BR.firstLoading)
@@ -183,9 +166,6 @@ open class RepositoryViewModel constructor(repositoryManager: IRepositoryManager
         mMessageNotifier.value = MessageWrapper.Companion.withSnackBar(throwable.message ?: return)
         handleLoading(false)
     }
-
-    @Bindable
-    fun isFirstLoading(): Boolean = mFirstLoading
 
     class Factory @Inject constructor(resources: Resources, repositoryManager: IRepositoryManager) : ViewModelProvider.NewInstanceFactory() {
 
