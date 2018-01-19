@@ -1,4 +1,4 @@
-package com.blackbelt.githubcodechallenge
+package com.blackbelt.github
 
 import org.junit.Test
 

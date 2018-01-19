@@ -11,7 +11,7 @@ abstract class BuildersModule {
 
     @ContributesAndroidInjector
     abstract fun bindRepositoryActivity(): RepositoryActivity
-    
+
     @ContributesAndroidInjector(modules = arrayOf(RepositoryDetailsModule::class))
     abstract fun bindRepositoryDetailsActivity(): RepositoryDetailsActivity
 }
