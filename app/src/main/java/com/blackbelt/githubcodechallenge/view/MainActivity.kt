@@ -1,7 +1,8 @@
-package com.blackbelt.githubcodechallenge
+package com.blackbelt.githubcodechallenge.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.blackbelt.githubcodechallenge.R
 
 class MainActivity : AppCompatActivity() {
 

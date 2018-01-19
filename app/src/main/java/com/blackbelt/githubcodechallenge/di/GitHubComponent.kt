@@ -9,6 +9,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(AndroidSupportInjectionModule::class,
         BindsModule::class,
+        BuildersModule::class,
         NetworkModule::class, HelpersModule::class))
 interface GitHubComponent {
 
