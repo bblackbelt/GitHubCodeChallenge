@@ -7,7 +7,9 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AndroidSupportInjectionModule::class))
+@Component(modules = arrayOf(AndroidSupportInjectionModule::class,
+        BindsModule::class,
+        NetworkModule::class, HelpersModule::class))
 interface GitHubComponent {
 
     fun inject(app: GitHubApp)

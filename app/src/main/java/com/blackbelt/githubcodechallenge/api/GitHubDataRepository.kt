@@ -2,10 +2,11 @@ package com.blackbelt.github.api
 
 import com.blackbelt.github.api.model.*
 import io.reactivex.Observable
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GitHubDataRepository constructor(gitHubApiService: GitHubApiService) : IGitHubDataRepository {
+class GitHubDataRepository @Inject constructor(gitHubApiService: GitHubApiService) : IGitHubDataRepository {
     private val mGitHubApiService = gitHubApiService
 
     override fun getRepositories(since: Int): Observable<List<RepositoryResponseBody>> = mGitHubApiService.getRepositories(since)
