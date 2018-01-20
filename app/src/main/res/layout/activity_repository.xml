@@ -32,7 +32,7 @@
                     onItemClickListener="@{repositoryViewModel.itemClickListener}"
                     android:id="@+id/repository_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
             <ProgressBar xmlns:tools="http://schemas.android.com/tools"
                     toVisibility="@{repositoryViewModel.firstLoading}"
@@ -45,6 +45,7 @@
                     android:theme="@style/CircularProgress"
                     android:indeterminate="true"
                     tools:ignore="MissingPrefix" />
+
         </FrameLayout>
     </LinearLayout>
 </layout>

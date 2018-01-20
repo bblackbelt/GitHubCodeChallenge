@@ -1,6 +1,6 @@
 package com.blackbelt.githubcodechallenge.view.repository.viewmodel
 
-import com.blackbelt.github.JsonFileReader
+import com.blackbelt.githubcodechallenge.JsonFileReader
 import com.blackbelt.githubcodechallenge.repository.model.Repository
 import com.google.gson.Gson
 import junit.framework.Assert

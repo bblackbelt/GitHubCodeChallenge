@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.content.res.Resources
 import android.databinding.Bindable
-import android.databinding.ObservableArrayList
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -13,7 +12,6 @@ import com.blackbelt.bindings.notifications.MessageWrapper
 import com.blackbelt.bindings.recyclerviewbindings.AndroidItemBinder
 import com.blackbelt.bindings.recyclerviewbindings.ItemClickListener
 import com.blackbelt.bindings.recyclerviewbindings.PageDescriptor
-import com.blackbelt.bindings.viewmodel.BaseViewModel
 import com.blackbelt.githubcodechallenge.BR
 import com.blackbelt.githubcodechallenge.R
 import com.blackbelt.githubcodechallenge.repository.IRepositoryManager
@@ -163,8 +161,8 @@ open class RepositoryViewModel constructor(repositoryManager: IRepositoryManager
 
     override fun handlerError(throwable: Throwable) {
         super.handlerError(throwable)
-        mMessageNotifier.value = MessageWrapper.Companion.withSnackBar(throwable.message ?: return)
         handleLoading(false)
+        mMessageNotifier.value = MessageWrapper.withSnackBar(throwable.message ?: return)
     }
 
     class Factory @Inject constructor(resources: Resources, repositoryManager: IRepositoryManager) : ViewModelProvider.NewInstanceFactory() {

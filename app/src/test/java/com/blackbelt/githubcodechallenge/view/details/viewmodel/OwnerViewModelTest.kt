@@ -1,6 +1,6 @@
 package com.blackbelt.githubcodechallenge.view.details.viewmodel
 
-import com.blackbelt.github.JsonFileReader
+import com.blackbelt.githubcodechallenge.JsonFileReader
 import com.blackbelt.githubcodechallenge.repository.model.Owner
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

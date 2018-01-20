@@ -10,6 +10,7 @@ buildscript {
         okHttpVersion = "3.8.1"
         testrunner_version = '1.0.1'
         espresso_version = '3.0.1'
+        rulesVersion = "1.0.0"
     }
     repositories {
         google()

@@ -43,10 +43,7 @@ class RepositoryManager @Inject constructor(dataRepository: IGitHubDataRepositor
                 }
                 .subscribe({
                     repositories.onNext(it)
-                },
-
-                        repositories::onError,
-                        repositories::onComplete)
+                }, repositories::onError, repositories::onComplete)
         return repositories.hide()
     }
 

@@ -1,9 +1,10 @@
-package com.blackbelt.githubcodechallenge
+package com.blackbelt.githubcodechallenge.android
 
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.stream.JsonReader
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import java.io.Closeable
 import java.io.IOException
 import java.io.InputStream
@@ -15,7 +16,9 @@ object JsonFileReader {
     fun <T> read(context: Context, fileName: String, gson: Gson, convertTo: Class<T>): Observable<T> {
         return try {
             val inputStream = context.assets.open("mock/$fileName")
-            read(inputStream, gson, convertTo)
+            Observable.just(inputStream)
+                    .subscribeOn(Schedulers.computation())
+                    .flatMap { inp -> read(inp, gson, convertTo) }
         } catch (e: Exception) {
             Observable.empty()
         }

@@ -14,7 +14,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.blackbelt.githubcodechallenge.TestRunner"
     }
     buildTypes {
         release {
@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.github.bblackbelt:BindingsCollections:2f9d886b2cd6b1f89373e72ef7ebda14c4e4b18d'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -63,4 +63,41 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.0.0"
     implementation 'com.facebook.fresco:fresco:1.5.0'
     testCompile 'org.mockito:mockito-core:2.13.0'
+
+    androidTestCompile 'org.mockito:mockito-android:2.8.9'
+
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    kaptAndroidTest("com.google.dagger:dagger:$daggerVersion") {
+        exclude group: 'javax.annotation'
+    }
+    androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kaptAndroidTest("com.google.dagger:dagger-android-support:$daggerVersion") {
+        exclude group: 'javax.annotation'
+        exclude group: 'com.android.support'
+    }
+
+    androidTestCompile("com.android.support.test:runner:$testrunner_version") {
+        exclude module: 'dagger'
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    androidTestCompile("com.android.support.test:rules:$rulesVersion") {
+        exclude module: 'dagger'
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    androidTestCompile("com.android.support.test.espresso:espresso-intents:$espresso_version") {
+        exclude module: 'dagger'
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_version") {
+        exclude module: 'dagger'
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$espresso_version") {
+        exclude module: 'dagger'
+        exclude group: 'com.android.support'
+    }
+    androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.0'
 }
