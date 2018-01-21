@@ -10,6 +10,8 @@ open class LoadingIndicatorViewModel : BaseViewModel() {
 
     private var mFirstLoading: Boolean = false
 
+    private var mError = false
+
     protected var mPageDescriptor = PageDescriptor.PageDescriptorBuilder
             .setPageSize(24)
             .setStartPage(1)
@@ -26,6 +28,10 @@ open class LoadingIndicatorViewModel : BaseViewModel() {
         } else {
             setLoading(loading)
         }
+    }
+
+    override fun handlerError(throwable: Throwable) {
+        super.handlerError(throwable)
     }
 
     private fun setFistLoading(loading: Boolean) {
