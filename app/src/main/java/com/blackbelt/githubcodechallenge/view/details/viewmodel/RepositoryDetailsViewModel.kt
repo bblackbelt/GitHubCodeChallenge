@@ -90,7 +90,13 @@ open class RepositoryDetailsViewModel constructor(repositoryManager: IRepository
                 .subscribe({
                     handleLoading(false)
                     notifyPropertyChanged(BR.subscribers)
+                    notifyPropertyChanged(BR.subscribersListVisible)
                 }, this::handlerError)
+    }
+
+    override fun handlerError(throwable: Throwable) {
+        super.handlerError(throwable)
+        notifyPropertyChanged(BR.subscribersListVisible)
     }
 
     @Bindable
@@ -112,6 +118,9 @@ open class RepositoryDetailsViewModel constructor(repositoryManager: IRepository
     fun getSubscribersList() = mItems
 
     @Bindable
+    fun isSubscribersListVisible() = !mItems.isEmpty()
+
+    @Bindable
     fun getItemDecoration(): RecyclerView.ItemDecoration = mItemDecoration
 
     override fun onCleared() {
@@ -124,6 +133,8 @@ open class RepositoryDetailsViewModel constructor(repositoryManager: IRepository
     fun getTemplatesForObjects(): Map<Class<*>, AndroidItemBinder> = hashMapOf(
             ProgressLoader::class.java to AndroidItemBinder(R.layout.loading_progress, BR.progressLoader),
             OwnerViewModel::class.java to AndroidItemBinder(R.layout.subscriber_item, BR.subscriber))
+
+    fun getRepositoryDetails() = mRepositoryDetails
 
     class Factory @Inject constructor(resources: Resources, repositoryManager: IRepositoryManager, repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 

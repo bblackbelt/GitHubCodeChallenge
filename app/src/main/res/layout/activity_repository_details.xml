@@ -44,7 +44,8 @@
                     itemViewBinder="@{repositoryDetailsViewModel.templatesForObjects}"
                     itemDecoration="@{repositoryDetailsViewModel.itemDecoration}"
                     pageDescriptor="@={repositoryDetailsViewModel.nextPage}"
-                    android:id="@+id/repository_rv"
+                    toVisibility="@{repositoryDetailsViewModel.subscribersListVisible}"
+                    android:id="@+id/subscribers_rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 

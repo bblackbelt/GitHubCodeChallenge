@@ -23,7 +23,7 @@ class RepositoryDetailsActivity : BaseInjectableBindingActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository_details, BR.repositoryDetailsViewModel, mRepositoryViewModel)
-        val recyclerView: AndroidBindableRecyclerView = findViewById(R.id.repository_rv)
+        val recyclerView: AndroidBindableRecyclerView = findViewById(R.id.subscribers_rv)
         val layoutManager = GridLayoutManager(this, 3)
         recyclerView.layoutManager = layoutManager
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -36,4 +36,6 @@ class RepositoryDetailsActivity : BaseInjectableBindingActivity() {
             }
         }
     }
+
+    fun getViewModel(): RepositoryDetailsViewModel = mRepositoryViewModel
 }

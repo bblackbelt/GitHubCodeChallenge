@@ -2,23 +2,29 @@ package com.blackbelt.githubcodechallenge.android
 
 import android.content.Context
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import java.io.Closeable
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.lang.reflect.Type
 
 object JsonFileReader {
 
     fun <T> read(context: Context, fileName: String, gson: Gson, convertTo: Class<T>): Observable<T> {
         return try {
             val inputStream = context.assets.open("mock/$fileName")
-            Observable.just(inputStream)
-                    .subscribeOn(Schedulers.computation())
-                    .flatMap { inp -> read(inp, gson, convertTo) }
+            return read(inputStream, gson, convertTo)
+        } catch (e: Exception) {
+            Observable.empty()
+        }
+    }
+
+    fun <T> readList(context: Context, fileName: String, gson: Gson, listType: TypeToken<T>): Observable<T> {
+        return try {
+            val inputStream = context.assets.open("mock/$fileName")
+            return Observable.just(readList(inputStream, gson, listType))
         } catch (e: Exception) {
             Observable.empty()
         }
@@ -33,10 +39,10 @@ object JsonFileReader {
         }
     }
 
-    fun <T> readList(inputStream: InputStream, gson: Gson, listType: Type): Observable<List<T>> {
+    fun <T> readList(inputStream: InputStream, gson: Gson, listType: TypeToken<T>): T {
         try {
             val jsonReader = JsonReader(InputStreamReader(inputStream))
-            return Observable.just(gson.fromJson(jsonReader, listType))
+            return gson.fromJson(jsonReader, listType.type)
         } finally {
             closeStream(inputStream)
         }
